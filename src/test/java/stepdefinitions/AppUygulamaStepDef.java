@@ -6,15 +6,23 @@ import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.ElementOption;
 import io.cucumber.java.en.And;
+import org.apache.commons.io.FileUtils;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.interactions.touch.TouchActions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.springframework.util.FileCopyUtils;
 import pages.apkScreens.AnaEkranScreen;
 import utilities.Driver;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.util.Date;
 import java.util.List;
 
 public class AppUygulamaStepDef {
@@ -87,5 +95,30 @@ public class AppUygulamaStepDef {
     @And("sayfada webwiev textinin goruldugu dogrulanir")
     public void sayfadaWebwievTextininGorulduguDogrulanir() {
         System.out.println("Driver.getDriver().getContextHandles() = " + Driver.getDriver().getContextHandles());
+    }
+
+    @And("Screenshoot al")
+    public void screenshootAl() {
+        String date=new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
+        String path=System.getProperty("user.dir")+"/test-output/EkranGoruntuleri/"+date+".png";
+        File hedef=new File(path);
+        TakesScreenshot ts=Driver.getDriver();
+
+        try {
+            FileUtils.copyFile(ts.getScreenshotAs(OutputType.FILE),hedef);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+
+    }
+
+    @And("{int} saniye bekle")
+    public void saniyeBekle(int arg0) {
+        try {
+            Thread.sleep(arg0*1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

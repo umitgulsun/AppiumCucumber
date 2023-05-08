@@ -15,8 +15,6 @@ public class AnaEkranScreen {
     public AnaEkranScreen()  {
         PageFactory.initElements(new AppiumFieldDecorator(Driver.getDriver(), Duration.ofSeconds(15)), this);
     }
-
-
     @AndroidFindBy(xpath = "//android.widget.Button[@text='Continue']")
     public MobileElement continueButton;
 
@@ -52,7 +50,6 @@ public class AnaEkranScreen {
             Driver.getDriver().findElementByAndroidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"" + text + "\"))");
             Driver.getDriver().findElementByXPath("//android.widget.TextView[@text='" + text + "']").click();
         }
-
     }
 
     public static void elementClickWithButton(String text) throws InterruptedException {

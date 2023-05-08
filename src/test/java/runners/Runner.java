@@ -16,7 +16,7 @@ import org.junit.runner.RunWith;
         monochrome = true,
         features ="src/test/resources",
         glue = "stepdefinitions",
-        tags = "@task8",
+        tags = "@task3",
         dryRun = false
 
 )
